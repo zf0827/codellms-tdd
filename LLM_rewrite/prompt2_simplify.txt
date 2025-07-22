@@ -1,0 +1,94 @@
+**Task: Simplify a Python Function by Renaming**
+
+You are given a Python function that may come from a larger project or codebase. As a result, the function may contain complex or non-intuitive variable names and hardcoded literals. Your task is to simplify this function to make it easier to understand by:
+
+- Renaming variables to be more intuitive and self-explanatory.
+- Replacing literal values with more meaningful or descriptive alternatives where appropriate (e.g., replacing `"A"` with `"admin"` if it represents a role).
+- **Do not change the code logic, structure, or behavior in any way.** The function must perform exactly the same operation as the original.
+
+**Rules:**
+1. Only rename variables and literals.
+2. Do not add, remove, or restructure any logic.
+3. Output only the simplified function starting with `def`, no explanations or comments.
+
+---
+
+**Example 1:**
+
+**Input:**
+def find_in_halved_sequence(sequence_of_elements, sought_item):
+    inferior_limit = 0
+    superior_limit = len(sequence_of_elements) - 1
+    while inferior_limit <= superior_limit:
+        pivot_point = (inferior_limit + superior_limit) // 2
+        if sequence_of_elements[pivot_point] == sought_item:
+            return pivot_point
+        elif sequence_of_elements[pivot_point] < sought_item:
+            inferior_limit = pivot_point + 1
+        else:
+            superior_limit = pivot_point - 1
+    return -1
+
+**Output:**
+def binary_search(sequence, target):
+    low = 0
+    high = len(sequence) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if sequence[mid] == target:
+            return mid
+        elif sequence[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+---
+
+**Example 2:**
+
+**Input:**
+def process_usr_dt(usr_dt):
+    if usr_dt['A'] == 1:
+        return 'Y'
+    else:
+        return 'N'
+
+**Output:**
+def process_user_data(user_data):
+    if user_data['is_active'] == 1:
+        return 'Yes'
+    else:
+        return 'No'
+
+---
+
+**Example 3:**
+
+**Input:**
+def cmpt_sc(rslt_arr):
+    ttl = 0
+    for itm in rslt_arr:
+        if itm > 5:
+            ttl += 2
+        else:
+            ttl += 1
+    return ttl
+
+**Output:**
+def compute_score(results):
+    total_score = 0
+    for result in results:
+        if result > 5:
+            total_score += 2
+        else:
+            total_score += 1
+    return total_score
+
+---
+
+**Input:**
+<Insert your function here>
+
+**Output:**
+(LLM should return the simplified Python function starting with `def`)

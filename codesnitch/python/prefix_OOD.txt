@@ -1,0 +1,82 @@
+def requires_grad(model, flag=True):
+    """
+    Set requires_grad flag for all parameters in a model.
+    """
+    for p in model.parameters():
+        p.requires_grad = flag
+def test_stream_text(client):
+  chat = client.chats.create(model='gemini-1.5-flash')
+  chunks = 0
+  for chunk in chat.send_message_stream(
+      'tell me a story in 100 words',
+  ):
+    chunks += 1
+
+  assert chunks > 2
+def fetch_readme() -> str:
+    """
+    This function reads the README.md file in the current directory.
+
+    Returns:
+        The lines in the README file.
+    """
+    with open("README.md", encoding="utf-8") as f:
+        return f.read()
+def test_code_execution_result_empty_parts():
+  response = types.GenerateContentResponse(
+      candidates=[types.Candidate(content=types.Content())]
+  )
+
+  assert response.code_execution_result is None
+def test_t_bytes(client):
+  assert t.t_bytes(client._api_client, _RAW_BYTES) == base64.b64encode(
+      _RAW_BYTES
+  ).decode('ascii')
+  assert t.t_bytes(client._api_client, 'string') == 'string'
+def fuse_qkv_projections(self) -> None:
+        r"""Enables fused QKV projections."""
+        self.fusing_transformer = True
+        self.transformer.fuse_qkv_projections()
+def get_current_weather(location: str) -> str:
+  """Returns the current weather.
+
+  Args:
+    location: The location of a city and state, e.g. "San Francisco, CA".
+  """
+  return 'windy'
+def timeit(self, name):
+        if name in self.timers:
+            timer = self.timers[name]
+        else:
+            timer = self.dummy_timer
+
+        with timer:
+            yield
+def get(self) -> T:
+        self.wait()
+        assert self.result is not None
+        if self.result.exception is not None:
+            raise self.result.exception
+        return self.result.value
+def _UrlContext_to_vertex(
+    api_client: BaseApiClient,
+    from_object: Union[dict[str, Any], object],
+    parent_object: Optional[dict[str, Any]] = None,
+) -> dict[str, Any]:
+  to_object: dict[str, Any] = {}
+
+  return to_object
+def get_reflection_pattern_score(res):
+            reflection_pattern_dict = check_reflection_pattern(res)
+            reflection_pattern_num = sum(reflection_pattern_dict.values())
+            return reflection_pattern_num
+def test_list_of_parts():
+  assert t.t_contents(None, [
+      types.Part(text='hello'),
+      types.Part(text='world'),
+  ]) == [
+      types.UserContent(parts=[
+          types.Part(text='hello'),
+          types.Part(text='world'),
+      ]),
+  ]

@@ -1,0 +1,94 @@
+You are given a Python function. Your task is to transform this function so that it appears to be a component of a larger, context-specific software system. You should do this only by changing variable names, string literals, comments, and formatting—do not change the control flow, logic, or structure of the function.
+
+### Rules:
+1. Do **not** modify the logic or control structure of the code.
+2. Only rename variables, parameters, and literals to make them relevant to a new context or domain.
+3. Add a meaningful docstring to reflect the new context if appropriate.
+4. The output must be **only** the transformed Python function, starting with `def`.
+5. Do not add explanations, comments, or outputs beyond the transformed function.
+
+---
+
+### Example 1
+
+**Original Code:**
+```python
+def search_number(sequence, number):
+    if number in sequence:
+        index = sequence.index(number)
+        print(f"Number {number} exists in the sequence.")
+        return index
+    else:
+        print(f"Number {number} does not exist in the sequence.")
+        return None
+```
+
+**Transformed Code:**
+```python
+def search_student(student_list, student_name):
+    """
+    Search for a student in the student list.
+    If found, print a report and return their index.
+    If not found, print a report and return None.
+    """
+    if student_name in student_list:
+        student_pos = student_list.index(student_name)
+        print(f"Student '{student_name}' exists in the student list.")
+        return student_pos
+    else:
+        print(f"Student '{student_name}' does not exist in the student list.")
+        return None
+```
+
+---
+
+### Example 2
+
+**Original Code:**
+```python
+def calculate_total(items):
+    total = 0
+    for item in items:
+        total += item
+    return total
+```
+
+**Transformed Code:**
+```python
+def calculate_order_cost(order_prices):
+    """
+    Calculate the total cost of an order based on item prices.
+    """
+    total_cost = 0
+    for price in order_prices:
+        total_cost += price
+    return total_cost
+```
+
+---
+
+### Example 3
+
+**Original Code:**
+```python
+def reverse_string(s):
+    return s[::-1]
+```
+
+**Transformed Code:**
+```python
+def reverse_document_title(title):
+    """
+    Reverse the characters in a document title.
+    """
+    return title[::-1]
+```
+
+---
+
+### Your Turn
+
+**Original Code:**
+<Insert your function here>
+
+**Now, transform this code following the same rules. Your output must be a single function starting with `def`, with no extra text.**

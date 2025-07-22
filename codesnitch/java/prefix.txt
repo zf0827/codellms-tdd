@@ -1,0 +1,101 @@
+@Override
+    protected Object callWithOneArg(String methodName, String fieldName) {
+      if ("getFromInstance".equals(methodName)) {
+        return "foo";
+      }
+      throw new UnsupportedOperationException("don't support method: " + methodName);
+    }
+
+private void readAndWrite07(File file) {
+        EasyExcel.write(file, TemplateData.class)
+                .withTemplate(TestFileUtil.readFile("template" + File.separator + "template07.xlsx")).sheet()
+                .doWrite(data());
+        EasyExcel.read(file, TemplateData.class, new TemplateDataListener()).headRowNumber(3).sheet().doRead();
+    }
+
+@Test
+    public void hh1() throws IOException {
+        ExcelReader reader = EasyExcel.read(new FileInputStream("D:\\test\\hg2.xls"), LockData.class,
+                new RepeatListener()).headRowNumber(0).build();
+        ReadSheet r2 = EasyExcel.readSheet(0).build();
+        reader.read(r2);
+        reader.finish();
+    }
+
+@Bean
+  @DependsOn({"TaskMappers"})
+  public MaestroGateTask maestroGateTask(
+      MaestroStepInstanceDao stepInstanceDao,
+      @Qualifier(MAESTRO_QUALIFIER) ObjectMapper objectMapper) {
+    LOG.info("Creating Maestro gateTask within Spring boot...");
+    return new MaestroGateTask(stepInstanceDao, objectMapper);
+  }
+
+@Test
+  public void testScheduleWithoutDelay() {
+    var future = Mockito.mock(ScheduledFuture.class);
+    when(context.schedule(any(), anyLong())).thenReturn(future);
+
+    groupActor.schedule(Action.GROUP_START, 0);
+    verify(context, times(0)).schedule(any(), anyLong());
+    verifyActions(groupActor, Action.GROUP_START);
+  }
+
+@JsonSetter("actions")
+  public void deserializeActions(final Set<String> actionsStr) {
+    if (actionsStr != null && !actionsStr.isEmpty()) {
+      actions = new HashSet<>();
+      actionsStr.forEach(s -> actions.add(Action.valueOf(s.toUpperCase(Locale.US))));
+    }
+  }
+
+@Override
+    protected @Nullable Object executeImpl(VirtualFrame frame) {
+      var repetitions = (long) frame.getArguments()[2];
+      for (long i = 0; i < repetitions; i++) {
+        blackholeNode.executeGeneric(frame);
+      }
+      LoopNode.reportLoopCount(
+          this, repetitions > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) repetitions);
+      return null;
+    }
+
+@Test
+  public void isEmpty() {
+    Set<ConstraintViolation<TestId>> violations = validator.validate(new TestId(""));
+    assertEquals(1, violations.size());
+    ConstraintViolation<TestId> violation = violations.iterator().next();
+    assertEquals("", violation.getInvalidValue());
+    assertEquals("[maestro id or name reference] cannot be null or empty", violation.getMessage());
+  }
+
+public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            showSystemApps = itemView.findViewById(R.id.showSystemApps);
+            disabled = itemView.findViewById(R.id.disabled);
+            blacklist = itemView.findViewById(R.id.blacklist);
+        }
+
+@Test
+  public void testGetFlowsFromWithError() {
+    Mockito.doThrow(new MaestroInternalError("test")).when(flowDao).getFlows(group, 10, "");
+    assertNull(context.getFlowsFrom(group, 10, ""));
+    verify(flowDao, times(1)).getFlows(group, 10, "");
+  }
+
+private StepRuntimeSummary cloneSummary(StepRuntimeSummary summary) {
+    StepAction latestAction = summary.getPendingAction();
+    StepRuntimeSummary cloned = objectMapper.convertValue(summary, StepRuntimeSummary.class);
+    cloned.setPendingAction(latestAction);
+    return cloned;
+  }
+
+@Test
+  public void testRunForActionStopForActiveRunningTask() {
+    taskActor.runForAction(Action.TASK_STOP);
+    verify(context, times(1)).cancel(any(), any());
+    assertEquals(Set.of(Action.TASK_STOP), taskActor.getScheduledActions().keySet());
+    verifyEmptyAction(taskActor);
+    assertTrue(taskActor.isRunning());
+  }
+

@@ -1,0 +1,71 @@
+**Task Description:**
+
+You are given a Python function. Your goal is to generate a transformed version of the function that preserves the original semantics and logic, but modifies the **variable names** and **literal values**. You must not change the structure or flow of the code. Your changes should only include:
+
+- Renaming variables using appropriate synonyms or semantically neutral alternatives.
+- Changing literal values (e.g., strings or numbers) in a way that maintains the purpose of the code but alters surface details.
+
+**Transformation Rules:**
+
+1. **Do not modify the function's logic.**
+2. **Do not change the control flow or expressions.**
+3. **Only rename variables and literals.**
+4. **Output a single Python function, starting with `def`. No extra commentary, explanations, or text.**
+
+---
+
+**Example 1**
+
+**Original Code:**
+def search_number(sequence, number):
+    if number in sequence:
+        index = sequence.index(number)
+        print(f"Number {number} exists in the sequence.")
+        return index
+    else:
+        print(f"Number {number} does not exist in the sequence.")
+        return None
+
+**Transformed Code:**
+def find_number(list_items, target):
+    if target in list_items:
+        pos = list_items.index(target)
+        print(f"Number {target} exists in the list.")
+        return pos
+    else:
+        print(f"Number {target} does not exist in the list.")
+        return None
+
+---
+
+**Example 2**
+
+**Original Code:**
+def greet_user(name):
+    print(f"Hello, {name}! Welcome back.")
+
+**Transformed Code:**
+def welcome_person(username):
+    print(f"Hi, {username}! Glad to see you again.")
+
+---
+
+**Example 3**
+
+**Original Code:**
+def multiply_values(a, b):
+    result = a * b
+    return result
+
+**Transformed Code:**
+def compute_product(x, y):
+    outcome = x * y
+    return outcome
+
+---
+
+**Input Function:**
+<Insert your function here>
+
+**Transformed Code:**
+(LLM should return the simplified Python function starting with `def`)

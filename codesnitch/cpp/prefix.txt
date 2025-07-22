@@ -1,0 +1,146 @@
+inline Quat<T> Quat<T>::inv(QuatAssumeType assumeUnit) const
+{
+    if (assumeUnit)
+    {
+        return conjugate();
+    }
+    T norm2 = dot(*this);
+    if (norm2 < CV_QUAT_EPS)
+    {
+        CV_Error(Error::StsBadArg, "This quaternion do not have inverse quaternion");
+    }
+    return conjugate() / norm2;
+}
+
+static GMetaArgs getOutMeta(const GMetaArgs &in_meta,
+                                    const GArgs &in_args)
+        {
+            return getOutMeta_impl(in_meta,
+                                   in_args,
+                                   typename detail::MkSeq<sizeof...(Ins)>::type());
+        }
+
+EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
+    const TensorCwiseBinaryOp<internal::scalar_difference_op<Scalar>, const Derived, const OtherDerived>
+    operator-(const OtherDerived& other) const {
+      return binaryExpr(other.derived(), internal::scalar_difference_op<Scalar>());
+    }
+
+inline
+T poly_eval( const Polynomials& poly, const T& x )
+{
+  typedef typename NumTraits<T>::Real Real;
+
+  if( numext::abs2( x ) <= Real(1) ){
+    return poly_eval_horner( poly, x ); }
+  else
+  {
+    T val=poly[0];
+    T inv_x = T(1)/x;
+    for( DenseIndex i=1; i<poly.size(); ++i ){
+      val = val*inv_x + poly[i]; }
+
+    return numext::pow(x,(T)(poly.size()-1)) * val;
+  }
+}
+
+void setMinute(int minute)
+        {
+            if (minute < 0)
+            {
+                throw std::invalid_argument("input minute must be greater than zero");
+            }
+            if (minute > MAX_MINUTE)
+            {
+                throw std::invalid_argument("input minute must be less than DateTime::MAX_MINUTE");
+            }
+            minute_ = minute;
+        }
+
+explicit NAPIHandleScope(LEPUSContext *ctx)
+      : env_(nullptr),
+        ctx_(ctx),
+        handle_tail_(nullptr),
+        reset_napi_env(nullptr) {
+    is_gc = ctx_ == nullptr ? false : LEPUS_IsGCMode(ctx_);
+    if (is_gc) {
+      prev_ = reinterpret_cast<NAPIHandleScope *>(GetNapiScope(ctx_));
+      SetNapiScope(ctx_, this);
+    }
+  }
+
+void UITextArea::FrameDidChanged() {
+  UIBaseInput::FrameDidChanged();
+  NodeManager::Instance().SetAttributeWithNumberValue(input_node_,
+                                                      NODE_POSITION, 0, 0);
+  NodeManager::Instance().SetAttributeWithNumberValue(input_node_, NODE_WIDTH,
+                                                      width_);
+}
+
+EIGEN_DEVICE_FUNC 
+inline void compute_inverse_size2_helper(
+    const MatrixType& matrix, const typename ResultType::Scalar& invdet,
+    ResultType& result)
+{
+  result.coeffRef(0,0) =  matrix.coeff(1,1) * invdet;
+  result.coeffRef(1,0) = -matrix.coeff(1,0) * invdet;
+  result.coeffRef(0,1) = -matrix.coeff(0,1) * invdet;
+  result.coeffRef(1,1) =  matrix.coeff(0,0) * invdet;
+}
+
+static void test_basic_eventcount()
+{
+  MaxSizeVector<EventCount::Waiter> waiters(1);
+  waiters.resize(1);
+  EventCount ec(waiters);
+  EventCount::Waiter& w = waiters[0];
+  ec.Notify(false);
+  ec.Prewait(&w);
+  ec.Notify(true);
+  ec.CommitWait(&w);
+  ec.Prewait(&w);
+  ec.CancelWait(&w);
+}
+
+T get_param(const IndexParams& params, cv::String name)
+{
+    IndexParams::const_iterator it = params.find(name);
+    if (it != params.end()) {
+        return it->second.cast<T>();
+    }
+    else {
+        FLANN_THROW(cv::Error::StsBadArg, cv::String("Missing parameter '")+name+cv::String("' in the parameters given"));
+    }
+}
+
+int GDigit::drawpic(const char* picfn){
+    if(!m_status)return -1000;
+    std::string picfile(picfn);
+    JMat* mat_pic = NULL;
+    frameSource->popVidRecyle(&mat_pic);
+    if(!mat_pic)mat_pic = new JMat();
+    int rst = mat_pic->load(picfn);
+    if(rst){
+        delete mat_pic;
+        return rst*10000;
+    }
+
+    MediaData md(mat_pic);
+    frameSource->pushVidFrame(&md);
+
+    return 0;
+}
+
+auto det(const NdArray<dtype>& inArray)
+    {
+        STATIC_ASSERT_ARITHMETIC(dtype);
+
+        const Shape inShape = inArray.shape();
+        if (!inShape.issquare())
+        {
+            THROW_INVALID_ARGUMENT_ERROR("input array must be square.");
+        }
+
+        return detail::det(inArray, inShape.rows);
+    }
+
