@@ -14,8 +14,8 @@ NUM_SAMPLES = 3000  # 要提取的样本总数
 # --- AWS S3 配置 ---
 try:
     session = boto3.Session(
-        aws_access_key_id="AKIA4RCAOH2WQMJNVKVZ",
-        aws_secret_access_key="M80VdKg39Piqr5pRokLhurhq03owHCUB45isWPrn"
+        aws_access_key_id="",
+        aws_secret_access_key=""
     )
     s3 = session.client("s3")
     print("AWS Session 和 S3 Client 初始化成功。")
